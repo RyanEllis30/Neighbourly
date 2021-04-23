@@ -16,7 +16,7 @@ If you want to create a seperate branch to not mess with the main repo:
 If you want to upload data for everyone else to then use:
 "git add 'file name'" For example:
 git add README.txt
-If there are multiple files you can just type "git add ." However this is bad practise and you should commit each individual file as they are individual changes
+If there are multiple files you can just type "git add ." However this is bad practice and you should commit each individual file as they are individual changes
 "git commit -m "commit message"" (You need those quotation marks around the commit message) For example
 git commit "Made a new branch for UI"
 "git push origin 'branch name'"
