@@ -7,7 +7,6 @@ type "git pull origin main"  # Pulls from the main repository
 Now you have the repo setup on your computer, you can edit and do everything you want.
 
 To get the latest data you need to do: 
-"git fetch origin main"
 "git pull origin main"
 
 If you want to create a seperate branch to not mess with the main repo:
