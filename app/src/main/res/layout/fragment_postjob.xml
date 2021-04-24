@@ -9,14 +9,14 @@
 
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/editTextJobTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="46dp"
         android:layout_marginBottom="7dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:text="@string/job_title"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button2"
         app:layout_constraintStart_toStartOf="parent" />
@@ -28,10 +28,10 @@
         android:layout_marginStart="2dp"
         android:layout_marginEnd="2dp"
         android:layout_marginBottom="4dp"
-        android:text="Add Job"
+        android:text="@string/add_job"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName" />
+        app:layout_constraintStart_toEndOf="@+id/editTextJobTitle" />
 
     <View
         android:id="@+id/divider2"
@@ -42,25 +42,29 @@
         android:layout_marginBottom="8dp"
         android:background="?android:attr/listDivider"
         android:backgroundTint="#072BF6"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/editTextJobTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
+
+    </View>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="52dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="@+id/divider2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <ListView
-            android:id="@+id/main_listview"
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
