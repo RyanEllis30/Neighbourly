@@ -18,7 +18,7 @@ class SettingsFragment: Fragment() {
             savedInstanceState: Bundle?
     ): View? {
 
-        val root = inflater.inflate(R.layout.fragment_account, container, false)
+        val root = inflater.inflate(R.layout.fragment_settings, container, false)
         return root
     }
 }

@@ -19,13 +19,10 @@ class SearchjobFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        searchjobViewModel =
-            ViewModelProvider(this).get(SearchjobViewModel::class.java)
+
         val root = inflater.inflate(R.layout.fragment_searchjob, container, false)
-        val textView: TextView = root.findViewById(R.id.text_gallery)
-        searchjobViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+
         return root
+
     }
 }
