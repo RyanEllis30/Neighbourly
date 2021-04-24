@@ -13,9 +13,9 @@ import com.example.neighbourly.R
 class SettingsFragment: Fragment() {
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
 
         val root = inflater.inflate(R.layout.fragment_account, container, false)
