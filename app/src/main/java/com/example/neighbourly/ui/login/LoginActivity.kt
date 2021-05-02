@@ -123,6 +123,15 @@ class LoginActivity : AppCompatActivity() {
     private fun showLoginFailed(@StringRes errorString: Int) {
         Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
     }
+
+    fun loginProcess(view: View)
+    {
+        
+    }
+
+    fun showRegisterMenu(view: View) {
+        setContentView(R.layout.activity_register)
+    }
 }
 
 /**
