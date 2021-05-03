@@ -10,8 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.neighbourly.R
 
-class HomepageFragment: Fragment() {
-
+class SettingsFragment: Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,

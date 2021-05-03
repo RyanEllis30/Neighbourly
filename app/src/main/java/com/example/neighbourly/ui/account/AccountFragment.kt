@@ -12,8 +12,6 @@ import com.example.neighbourly.R
 
 class AccountFragment : Fragment() {
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

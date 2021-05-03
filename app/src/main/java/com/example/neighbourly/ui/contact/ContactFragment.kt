@@ -10,9 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.neighbourly.R
 
-
 class ContactFragment : Fragment() {
-
 
     override fun onCreateView(
             inflater: LayoutInflater,

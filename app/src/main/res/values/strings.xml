@@ -24,4 +24,6 @@
     <string name="menu_Feedback">Feedback</string>
     <string name="job_title">Job Title</string>
     <string name="add_job">Add Job</string>
+    <string name="display_slogan">Welcome</string>
+    <string name="menu_homepage">Home</string>
 </resources>

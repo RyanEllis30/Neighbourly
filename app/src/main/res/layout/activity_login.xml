@@ -104,10 +104,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login" />
 
-    <include
-        android:id="@+id/activity_navigation"
-        android:visibility="gone"
-        layout="@layout/activity_navigation"/>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

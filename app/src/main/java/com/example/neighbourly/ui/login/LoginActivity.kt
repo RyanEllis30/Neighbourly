@@ -18,6 +18,8 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import com.example.neighbourly.*
 
+const val usernameKey = "com.example.neighbourly.displayName"
+
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var loginViewModel: LoginViewModel
@@ -40,11 +42,9 @@ class LoginActivity : AppCompatActivity() {
         val forceEntryButton = findViewById<Button>(R.id.forceEntryButton)
         val register = findViewById<Button>(R.id.register)
 
-
         forceEntryButton.setOnClickListener {//This is the force entry button, it will be deleted upon launch, bypasses database login
-            Log.d("Errors", "Line 45 login activity")
-            val intent = Intent(this, Navigation::class.java)
-            startActivity(intent)
+            loading.visibility = View.VISIBLE
+            loginViewModel.login("hello", "password")
         }
 
         register.setOnClickListener{//This is the register button, it will attempt to register a user based on the data in the textboxes
@@ -142,15 +142,15 @@ class LoginActivity : AppCompatActivity() {
                 }
                 false
             }
-
-
         }
     }
 
     private fun updateUiWithUser(model: LoggedInUserView) {
         val welcome = getString(R.string.welcome)
         val displayName = model.displayName
-        val intent = Intent(this, Navigation::class.java)
+        val intent = Intent(this, Navigation::class.java).apply {
+            putExtra(displayName, usernameKey)
+        }
         startActivity(intent)
         // TODO : initiate successful logged in experience
         Toast.makeText(

@@ -11,13 +11,13 @@ import com.example.neighbourly.data.LoginDataSource
 
 class DatabaseHelper(context: Context):SQLiteOpenHelper(context, dbname, factory, dbversion) {
 
-    var cursorCount = 0
+
 
     companion object {
         const val dbname = "Account"
         val factory = null
         const val dbversion = 1
-
+        var cursorCount = 0
     }
 
     override fun onCreate(db: SQLiteDatabase?) {

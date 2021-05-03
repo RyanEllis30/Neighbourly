@@ -1,6 +1,5 @@
 package com.example.neighbourly.data
 
-import com.example.neighbourly.DatabaseHelper
 import com.example.neighbourly.data.model.LoggedInUser
 import java.io.IOException
 
@@ -9,11 +8,11 @@ import java.io.IOException
  */
 class LoginDataSource {
 
-    fun login(username: String, password: String): Result<LoggedInUser> {
+    fun login(username: String): Result<LoggedInUser> {
         return try {
             // TODO: handle loggedInUser authentication
-            val fakeUser = LoggedInUser(java.util.UUID.randomUUID().toString(), "Jane Doe")
-            Result.Success(fakeUser)
+            val user = LoggedInUser(java.util.UUID.randomUUID().toString(), username)
+            Result.Success(user)
         } catch (e: Throwable) {
             Result.Error(IOException("Error logging in", e))
         }
