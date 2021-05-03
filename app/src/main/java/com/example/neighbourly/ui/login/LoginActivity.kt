@@ -9,6 +9,7 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
@@ -20,28 +21,67 @@ import com.example.neighbourly.*
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var loginViewModel: LoginViewModel
+    lateinit var handler:DatabaseHelper
+
+    fun showLoginMenu(view: View) {
+        setContentView(R.layout.activity_login)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_login)
+
+        handler = DatabaseHelper(this)
 
         val username = findViewById<EditText>(R.id.username)
         val password = findViewById<EditText>(R.id.password)
         val login = findViewById<Button>(R.id.login)
         val loading = findViewById<ProgressBar>(R.id.loading)
-        val button = findViewById<Button>(R.id.button)
+        val forceEntryButton = findViewById<Button>(R.id.forceEntryButton)
+        val register = findViewById<Button>(R.id.register)
 
 
-
-        button.setOnClickListener {
+        forceEntryButton.setOnClickListener {//This is the force entry button, it will be deleted upon launch, bypasses database login
+            Log.d("Errors", "Line 45 login activity")
             val intent = Intent(this, Navigation::class.java)
             startActivity(intent)
         }
 
+        register.setOnClickListener{//This is the register button, it will attempt to register a user based on the data in the textboxes
+            // Collect email and password from main page
+            val emailText = username.text.toString()
+            val passwordText = password.text.toString()
 
+            // Use DB Handler to search for user then store result
+            handler.findUserExists("$emailText", "$passwordText")
+            val value = handler.fetchResult()
 
+            if (value <= 0) { // Value = amount of records with the same email
+                handler.insertUserData("$emailText", "$passwordText")
+                showLoginFailed("Account created")
+            }
+            else { // if value > 1 that means account exists
+                showLoginFailed("That email already exists")
+            }
+        }
 
+        login.setOnClickListener { // This is the login button, it will attempt to login a user based on the data in the textboxes
+            // Collect email and password from main page
+            val emailText = username.text.toString()
+            val passwordText = password.text.toString()
+
+            // Use DB Handler to search for user then store result
+            handler.findUser("$emailText", "$passwordText")
+            val value = handler.fetchResult()
+
+            if (value <= 0) { // Value = amount of records with the same email and password
+                showLoginFailed("Incorrect email or password")
+            }
+            else { // Successful login, log in user
+                loading.visibility = View.VISIBLE
+                loginViewModel.login(emailText, passwordText)
+            }
+        }
 
         loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
                 .get(LoginViewModel::class.java)
@@ -49,8 +89,9 @@ class LoginActivity : AppCompatActivity() {
         loginViewModel.loginFormState.observe(this@LoginActivity, Observer {
             val loginState = it ?: return@Observer
 
-            // disable login button unless both username / password is valid
+            // disable login/register button unless both username / password is valid
             login.isEnabled = loginState.isDataValid
+            register.isEnabled = loginState.isDataValid
 
             if (loginState.usernameError != null) {
                 username.error = getString(loginState.usernameError)
@@ -65,7 +106,7 @@ class LoginActivity : AppCompatActivity() {
 
             loading.visibility = View.GONE
             if (loginResult.error != null) {
-                showLoginFailed(loginResult.error)
+                showLoginFailed("Incorrect email or password")
             }
             if (loginResult.success != null) {
                 updateUiWithUser(loginResult.success)
@@ -102,16 +143,15 @@ class LoginActivity : AppCompatActivity() {
                 false
             }
 
-            login.setOnClickListener {
-                loading.visibility = View.VISIBLE
-                loginViewModel.login(username.text.toString(), password.text.toString())
-            }
+
         }
     }
 
     private fun updateUiWithUser(model: LoggedInUserView) {
         val welcome = getString(R.string.welcome)
         val displayName = model.displayName
+        val intent = Intent(this, Navigation::class.java)
+        startActivity(intent)
         // TODO : initiate successful logged in experience
         Toast.makeText(
                 applicationContext,
@@ -120,17 +160,8 @@ class LoginActivity : AppCompatActivity() {
         ).show()
     }
 
-    private fun showLoginFailed(@StringRes errorString: Int) {
+    private fun showLoginFailed(errorString: String) {
         Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
-    }
-
-    fun loginProcess(view: View)
-    {
-        
-    }
-
-    fun showRegisterMenu(view: View) {
-        setContentView(R.layout.activity_register)
     }
 }
 
