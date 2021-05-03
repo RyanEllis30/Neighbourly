@@ -6,6 +6,10 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_Home"
+            android:icon="@android:drawable/ic_dialog_dialer"
+            android:title="@string/menu_homepage" />
+        <item
             android:id="@+id/nav_Postjob"
             android:icon="@android:drawable/ic_dialog_map"
             android:title="@string/menu_Postjob" />
@@ -27,9 +31,12 @@
             android:id="@+id/nav_Feedback"
             android:icon="@android:drawable/btn_star"
             android:title="@string/menu_Feedback" />
-
         <item
-            android:id="@+id/nav_Home"
-            android:title="@string/menu_homepage" />
+            android:id="@+id/nav_Settings"
+            android:icon="@android:drawable/ic_menu_manage"
+            android:title="@string/menu_Settings" />
+
+
+
     </group>
 </menu>

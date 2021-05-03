@@ -22,6 +22,8 @@
     <string name="menu_Account">Account</string>
     <string name="menu_Contact">Contact Us</string>
     <string name="menu_Feedback">Feedback</string>
+    <string name="menu_Home">Home</string>
+    <string name="menu_Settings">Settings</string>
     <string name="job_title">Job Title</string>
     <string name="add_job">Add Job</string>
     <string name="display_slogan">Welcome</string>
