@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Navigation"
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_Home"
+            android:icon="@android:drawable/ic_dialog_dialer"
+            android:title="@string/menu_homepage" />
         <item
             android:id="@+id/nav_Postjob"
             android:icon="@android:drawable/ic_dialog_map"
             android:title="@string/menu_Postjob" />
         <item
             android:id="@+id/nav_Searchjob"
-            android:icon="@android:drawable/ic_dialog_dialer"
+            android:icon="@android:drawable/ic_menu_search"
             android:title="@string/menu_Searchjob" />
         <item
             android:id="@+id/nav_Account"
@@ -26,5 +31,12 @@
             android:id="@+id/nav_Feedback"
             android:icon="@android:drawable/btn_star"
             android:title="@string/menu_Feedback" />
+        <item
+            android:id="@+id/nav_Settings"
+            android:icon="@android:drawable/ic_menu_manage"
+            android:title="@string/menu_Settings" />
+
+
+
     </group>
 </menu>

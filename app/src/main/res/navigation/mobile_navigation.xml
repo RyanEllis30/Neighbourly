@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_Postjob">
+    app:startDestination="@id/nav_Home">
 
     <fragment
         android:id="@+id/nav_Postjob"
         android:name="com.example.neighbourly.ui.postjob.PostJobFragment"
         android:label="@string/menu_Postjob"
-        tools:layout="@layout/fragment_postjob" />
+        tools:layout="@layout/fragment_postjob"/>
 
     <fragment
         android:id="@+id/nav_Searchjob"
@@ -21,7 +21,7 @@
         android:id="@+id/nav_Account"
         android:name="com.example.neighbourly.ui.account.AccountFragment"
         android:label="@string/menu_Account"
-        tools:layout="@layout/fragment_account" />
+        tools:layout="@layout/fragment_account"/>
     <fragment
         android:id="@+id/nav_Feedback"
         android:name="com.example.neighbourly.ui.feedback.FeedbackFragment"
@@ -32,4 +32,13 @@
         android:name="com.example.neighbourly.ui.contact.ContactFragment"
         android:label="@string/menu_Contact"
         tools:layout="@layout/fragment_contact" />
+    <fragment
+        android:id="@+id/nav_Home"
+        android:name="com.example.neighbourly.ui.home.HomepageFragment"
+        android:label="@string/menu_Home"
+        tools:layout="@layout/fragment_homepage"/>
+    <fragment
+        android:id="@+id/nav_Settings"
+        android:name="com.example.neighbourly.ui.settings.SettingsFragment"
+        android:label="@string/action_settings" />
 </navigation>
