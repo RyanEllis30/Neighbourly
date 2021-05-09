@@ -5,65 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
-    tools:context=".Navigation"><![CDATA[
-    android:background="@drawable/bg">
-
-
-
-
-
-    ]]>
+    tools:context=".Navigation">
 
     <Switch
-        android:id="@+id/switch3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/switch1"
+        android:layout_width="339dp"
+        android:layout_height="38dp"
+        android:text="Email Notifactions"
+        tools:layout_editor_absoluteX="36dp"
+        tools:layout_editor_absoluteY="50dp" />
 
     <Switch
-        android:id="@+id/switch5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switch3"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <EditText
-        android:id="@+id/push_notifications"
-        android:layout_width="317dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="72dp"
-        android:ems="10"
-        android:inputType="textPersonName"
+        android:id="@+id/switch2"
+        android:layout_width="337dp"
+        android:layout_height="42dp"
         android:text="Push Notifications"
-        app:layout_constraintEnd_toStartOf="@+id/switch3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/email_notifications"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Email Notifications"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/switch5"
-        app:layout_constraintTop_toBottomOf="@+id/push_notifications"
-        app:layout_constraintVertical_bias="0.06" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="-147dp"></LinearLayout>
-
+        tools:layout_editor_absoluteX="36dp"
+        tools:layout_editor_absoluteY="105dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
