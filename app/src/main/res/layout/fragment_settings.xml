@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg"
     tools:context=".Navigation"><![CDATA[
     android:background="@drawable/bg">
 
@@ -57,5 +58,12 @@
         app:layout_constraintEnd_toStartOf="@+id/switch5"
         app:layout_constraintTop_toBottomOf="@+id/push_notifications"
         app:layout_constraintVertical_bias="0.06" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="-147dp"></LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
