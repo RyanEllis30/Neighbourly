@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg"
     tools:context=".Navigation">
     android:background="@drawable/bg">
 
@@ -45,30 +46,34 @@
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="153dp"
-        android:layout_height="110dp"
-        android:layout_marginBottom="64dp"
+        android:layout_width="166dp"
+        android:layout_height="83dp"
+        android:layout_marginBottom="80dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.112"
+        app:layout_constraintHorizontal_bias="0.065"
         app:layout_constraintStart_toStartOf="parent">
 
-        <EditText
-            android:id="@+id/editTextTextPersonName"
+        <TextView
+            android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Shopping" />
+            android:text="Paint Fence"
+            android:textSize="24sp" />
 
-        <EditText
-            android:id="@+id/editTextTextPersonName5"
+        <View
+            android:id="@+id/divider8"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:background="?android:attr/listDivider" />
+
+        <TextView
+            android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Paint Wall" />
+            android:text="Shopping"
+            android:textSize="24sp" />
     </LinearLayout>
 
     <Button
