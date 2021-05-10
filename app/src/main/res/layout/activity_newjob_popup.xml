@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.account.addressPopup">
+    tools:context=".ui.postjob.newjobPopup">
 
     <ScrollView
-        android:layout_width="416dp"
-        android:layout_height="505dp"
+        android:layout_width="match_parent"
+        android:layout_height="482dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -20,7 +20,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/ChangeAddress"
+                android:id="@+id/Addjob"
                 android:layout_width="315dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -28,14 +28,14 @@
                 android:layout_marginEnd="20dp"
                 android:ellipsize="end"
                 android:maxLines="3"
-                android:text="Change Address"
+                android:text="Add New Job"
                 android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textColor="@color/black"
                 android:textSize="17sp" />
 
             <TextView
-                android:id="@+id/housenumber"
+                android:id="@+id/newdescription"
                 android:layout_width="147dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
@@ -43,19 +43,19 @@
                 android:layout_marginEnd="10dp"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
-                android:text="House Number" />
+                android:text="Description" />
 
             <EditText
-                android:id="@+id/edithousenumber"
-                android:layout_width="309dp"
+                android:id="@+id/editnewdescription"
+                android:layout_width="303dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:hint="Insert house number"/>
+                android:hint="add job description"
+                android:inputType="textPersonName" />
 
             <TextView
-                android:id="@+id/street"
+                android:id="@+id/newjobtype"
                 android:layout_width="145dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
@@ -63,41 +63,20 @@
                 android:layout_marginEnd="10dp"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
-                android:text="Street" />
+                android:text="Job type" />
+
 
             <EditText
-                android:id="@+id/editstreet"
-                android:layout_width="306dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:hint="Insert street"
-                android:ems="10"
-                android:inputType="textPersonName"
-                 />
-
-            <TextView
-                android:id="@+id/city"
-                android:layout_width="147dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:text="City" />
-
-            <EditText
-                android:id="@+id/editCity"
-                android:layout_width="305dp"
+                android:id="@+id/editnewjobtype"
+                android:layout_width="313dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:hint="Insert city"
-                 />
+                android:hint="add job type"
+                android:inputType="textPersonName" />
 
             <TextView
-                android:id="@+id/postcode"
+                android:id="@+id/newrequirements"
                 android:layout_width="144dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
@@ -105,19 +84,19 @@
                 android:layout_marginEnd="10dp"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
-                android:text="Postcode" />
+                android:text="Additional Requirements" />
 
             <EditText
-                android:id="@+id/editpostcode"
-                android:layout_width="305dp"
-                android:layout_height="wrap_content"
+                android:id="@+id/editnewrequirements"
+                android:layout_width="304dp"
+                android:layout_height="72dp"
                 android:layout_marginStart="20dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:hint="Insert postcode" />
+                android:hint="Insert additional requirements"
+                android:inputType="textPersonName" />
 
             <Button
-                android:id="@+id/CancelAddress"
+                android:id="@+id/Canceljob"
                 android:layout_width="154dp"
                 android:layout_height="55dp"
 
@@ -128,7 +107,7 @@
                 android:text="Cancel" />
 
             <Button
-                android:id="@+id/updateAddress"
+                android:id="@+id/addJob"
                 android:layout_width="159dp"
                 android:layout_height="55dp"
 
@@ -136,10 +115,10 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="15dp"
                 android:layout_marginBottom="15dp"
-                android:text="Update " />
+                android:text="Add" />
 
         </LinearLayout>
 
     </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

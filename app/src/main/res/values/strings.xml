@@ -29,4 +29,19 @@
     <string name="display_slogan">Welcome</string>
     <string name="menu_homepage">Home</string>
     <string name="paint_fence">Paint Fence</string>
+
+
+    <string name="selected_item">Selected item:</string>
+
+    <string-array name="job_type">
+        <item>Shopping</item>
+        <item>IT</item>
+        <item>Cooking</item>
+        <item>Delivery</item>
+        <item>Building</item>
+        <item>Paperwork</item>
+        <item>Driving</item>
+        <item>Other</item>
+
+    </string-array>
 </resources>
