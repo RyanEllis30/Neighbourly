@@ -22,16 +22,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.205" />
 
-    <View
-        android:id="@+id/divider3"
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:layout_marginTop="31dp"
-        android:layout_marginBottom="32dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="266dp"
@@ -234,23 +224,23 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Search Jobs"
-        app:layout_constraintBottom_toTopOf="@+id/divider5"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/search_jobs"
-        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintHorizontal_bias="0.546"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.987" />
+        app:layout_constraintVertical_bias="0.116" />
 
     <SearchView
         android:id="@+id/search_jobs"
         android:layout_width="184dp"
         android:layout_height="45dp"
-        app:layout_constraintBottom_toTopOf="@+id/divider5"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="0.115">
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -263,5 +253,17 @@
                 android:hint="hint" />
         </com.google.android.material.textfield.TextInputLayout>
     </SearchView>
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginStart="4dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.082" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
