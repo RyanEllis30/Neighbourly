@@ -1,0 +1,22 @@
+[33me5a6c8f[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m HEAD@{0}: pull origin main: Fast-forward
+[33m43dde9e[m HEAD@{1}: reset: moving to main
+[33m43dde9e[m HEAD@{2}: pull origin main: Merge made by the 'recursive' strategy.
+[33m0c676cb[m HEAD@{3}: commit: Fixed database and added contact page connection
+[33m8ee8870[m HEAD@{4}: pull origin main: Fast-forward
+[33m9433e9d[m HEAD@{5}: pull origin main: Fast-forward
+[33mc2fb26b[m HEAD@{6}: reset: moving to main
+[33mc2fb26b[m HEAD@{7}: commit: Added database creation function
+[33mb2ae82c[m HEAD@{8}: commit: Finished up sharing login data set with program
+[33m22ef20a[m HEAD@{9}: commit: Added login function, still need to configure login details with rest of application
+[33mb5783a3[m HEAD@{10}: commit: Added Register function & page, UI team to make layout
+[33mb564528[m HEAD@{11}: pull origin main: Fast-forward
+[33m340812c[m HEAD@{12}: commit: Edited READM.txt
+[33mcd8ff98[m HEAD@{13}: commit: Edited README.txt
+[33m42b6e40[m HEAD@{14}: pull origin main: Fast-forward
+[33ma3ce6f2[m HEAD@{15}: commit: Added README file
+[33m7a70fc0[m HEAD@{16}: commit: Initial file uploaded
+[33m35773c6[m HEAD@{17}: commit: File sorting
+[33m72ffd13[m HEAD@{18}: pull --progress origin: Fast-forward
+[33m977c9dd[m HEAD@{19}: commit: File restructuring
+[33mac00931[m HEAD@{20}: pull --progress origin: Fast-forward
+[33m897736f[m HEAD@{21}: commit (initial): Initial commit

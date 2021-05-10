@@ -15,12 +15,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.347">
+        app:layout_constraintVertical_bias="0.1">
 
         <View
             android:id="@+id/divider11"
             android:layout_width="match_parent"
-            android:layout_height="13dp"
+            android:layout_height="9dp"
             android:background="?android:attr/listDivider" />
 
         <Switch
@@ -38,13 +38,13 @@
         <Switch
             android:id="@+id/switch2"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="39dp"
             android:text="Push Notifications" />
 
         <View
             android:id="@+id/divider10"
             android:layout_width="match_parent"
-            android:layout_height="13dp"
+            android:layout_height="9dp"
             android:background="?android:attr/listDivider" />
 
     </LinearLayout>

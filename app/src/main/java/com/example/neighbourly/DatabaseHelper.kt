@@ -5,10 +5,6 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
-import android.widget.Toast
-import androidx.core.database.getStringOrNull
-import com.example.neighbourly.data.LoginDataSource
-import com.example.neighbourly.ui.contact.ContactFragment
 
 class DatabaseHelper(context: Context):SQLiteOpenHelper(context, dbname, factory, dbversion) {
 
@@ -19,20 +15,9 @@ class DatabaseHelper(context: Context):SQLiteOpenHelper(context, dbname, factory
         var cursorCount = 0
     }
 
-    //DO NOT EDIT ANYTHING ABOVE LINE 43, DON'T EDIT THE TABLES, ASK RYAN FIRST PLEASE I BEG
-
+    // Do not edit the onCreate function
     override fun onCreate(db: SQLiteDatabase?) {
         Log.d("Errors", "Creating database")
-        db?.execSQL("create table Account(ID_account integer primary key autoincrement, Email varchar(100) not null, Password varchar(25) not null)")
-        db?.execSQL("create table Address(ID_address integer primary key autoincrement, HouseNum integer not null, Road varchar(50) not null, City varchar(50) not null, Postcode varchar(10) not null)")
-        db?.execSQL("create table User(ID_user integer primary key autoincrement, Name varchar(50) not null, Is_worker integer not null, Verified integer not null, Rating Real not null, Account_Id integer, Address_Id integer, foreign key (Account_Id) references Account(ID_account), foreign key (Address_Id) references Address(ID_address))")
-        db?.execSQL("create table Task(ID_task integer primary key autoincrement, Description varchar(100) not null, Job_type varchar(50) not null, Status varchar(50) not null, Additional_requirements varchar(100) not null, Customer_Account_Id integer, Worker_Account_Id integer, foreign key (Customer_Account_Id) references Account(ID_account), foreign key (Worker_Account_Id) references Account(ID_account))")
-        db?.execSQL("create table Review(ID_review integer primary key autoincrement, Rating integer not null, Description varchar(100) not null, User_Name varchar(50), foreign key (User_Name) references User(Name))")
-        db?.execSQL("create table Feedback(ID_feedback integer primary key autoincrement, Contact_Message varchar(250) not null, Email varchar(100), foreign key (Email) references Account(Email))")
-    }
-
-    fun onUpgrade(db: SQLiteDatabase?) { // I added this and the database started working, it isn't ever called but I'm too scared to remove it
-        Log.d("Errors", "Upgrading database")
         db?.execSQL("create table Account(ID_account integer primary key autoincrement, Email varchar(100) not null, Password varchar(25) not null)")
         db?.execSQL("create table Address(ID_address integer primary key autoincrement, HouseNum integer not null, Road varchar(50) not null, City varchar(50) not null, Postcode varchar(10) not null)")
         db?.execSQL("create table User(ID_user integer primary key autoincrement, Name varchar(50) not null, Is_worker integer not null, Verified integer not null, Rating Real not null, Account_Id integer, Address_Id integer, foreign key (Account_Id) references Account(ID_account), foreign key (Address_Id) references Address(ID_address))")
@@ -88,6 +73,15 @@ class DatabaseHelper(context: Context):SQLiteOpenHelper(context, dbname, factory
         db.insert("Review", null, values)
         println("Successfully added $rating and $description to table Review under $name")
         db.close()
+    }
+
+    fun findJobDetails(jobID: String): Array<String> {
+        val jobDescription = "Paint Fence"
+        val jobType = "Decorating"
+        val status = "Unclaimed"
+        val additionalRequirements = "Paint brushes"
+        val customerAccountId = "00001"
+        return arrayOf(jobDescription, jobType, status, additionalRequirements, customerAccountId)
     }
 
     fun findUser(email: String, password: String): Boolean {
