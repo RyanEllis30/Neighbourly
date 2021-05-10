@@ -1,5 +1,7 @@
 package com.example.neighbourly.ui.searchjob
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,6 +19,33 @@ import java.util.*
 
 class SearchjobFragment : Fragment() {
 
+    private lateinit var jobDetailsDialog: AlertDialog
+    fun showCustomDialog() {
+        val inflater: LayoutInflater = this.getLayoutInflater()
+        val dialogView: View = inflater.inflate(R.layout.activity_searchjob_details, null)
+
+        //val header_txt = dialogView.findViewById<TextView>(R.id.ChangeAddress)
+
+        //val details_txt = dialogView.findViewById<TextView>(R.id.housenumber)
+        val cancel: Button = dialogView.findViewById(R.id.CancelJobDetails)
+        cancel.setOnClickListener {
+            jobDetailsDialog.cancel()
+        }
+
+        val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
+        dialogBuilder.setOnDismissListener(object : DialogInterface.OnDismissListener {
+            override fun onDismiss(arg0: DialogInterface) {
+
+            }
+        })
+        dialogBuilder.setView(dialogView)
+
+        jobDetailsDialog = dialogBuilder.create();
+        //alertDialog.window!!.getAttributes().windowAnimations = R.style.PauseDialogAnimation
+        jobDetailsDialog.show()
+    }
+
+
     private lateinit var searchjobViewModel: SearchjobViewModel
     lateinit var handler: DatabaseHelper
 
@@ -29,6 +58,8 @@ class SearchjobFragment : Fragment() {
 
         val root = inflater.inflate(R.layout.fragment_searchjob, container, false)
         var jobs = handler.findAllJobs()
+        val details = root.findViewById<Button>(R.id.button9)
+        details.setOnClickListener { showCustomDialog() }
 
         val paintFenceDetailsButton = root.findViewById<Button>(R.id.button7)
         val textView3: TextView = root.findViewById(R.id.textView3) as TextView
