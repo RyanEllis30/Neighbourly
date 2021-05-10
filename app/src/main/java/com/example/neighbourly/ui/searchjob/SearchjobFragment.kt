@@ -33,6 +33,7 @@ class SearchjobFragment : Fragment() {
         val paintFenceDetailsButton = root.findViewById<Button>(R.id.button7)
         val textView3: TextView = root.findViewById(R.id.textView3) as TextView
         textView3.text = jobs[0]
+
         paintFenceDetailsButton.setOnClickListener { //This is the first details button
             val jobId = "1"
 

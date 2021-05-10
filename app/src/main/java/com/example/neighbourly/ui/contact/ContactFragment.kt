@@ -38,7 +38,7 @@ class ContactFragment : Fragment() {
             val email = contactEmail.text
             if (this::handler.isInitialized) {
                 handler.insertContactMessage("$email", "$message")
-                Toast.makeText(requireContext(), "Feedback has been noted", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Your contact request has been noted", Toast.LENGTH_SHORT).show()
             }
         }
 
