@@ -2,9 +2,13 @@ package com.example.neighbourly
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.DatabaseUtils
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.database.sqlite.SQLiteCursor
 import android.util.Log
+import androidx.core.database.getStringOrNull
+import java.util.*
 
 class DatabaseHelper(context: Context):SQLiteOpenHelper(context, dbname, factory, dbversion) {
 
@@ -75,12 +79,33 @@ class DatabaseHelper(context: Context):SQLiteOpenHelper(context, dbname, factory
         db.close()
     }
 
+    fun createJob(Description: String, Job_type: String, Status: String, Additional_requirements: String, Customer_Account_Id: String, Worker_Account_Id: String) {
+        val db = writableDatabase
+        val values: ContentValues = ContentValues()
+        values.put("Description", Description)
+        values.put("Job_type", Job_type)
+        values.put("Status", Status)
+        values.put("Additional_requirements", Additional_requirements)
+        values.put("Customer_Account_Id", Customer_Account_Id)
+        values.put("Worker_Account_Id", Worker_Account_Id)
+
+        db.insert("Task", null, values)
+        db.close()
+    }
+
     fun findJobDetails(jobID: String): Array<String> {
-        val jobDescription = "Paint Fence"
-        val jobType = "Decorating"
-        val status = "Unclaimed"
-        val additionalRequirements = "Paint brushes"
-        val customerAccountId = "00001"
+        val db = writableDatabase
+        val query = "SELECT * FROM Task WHERE ID_task = \"$jobID\""
+        val cursor = db.rawQuery(query, null)
+
+        cursor.moveToFirst()
+        val jobDescription = cursor.getString(1)
+        val jobType = cursor.getString(2)
+        val status = cursor.getString(3)
+        val additionalRequirements = cursor.getString(4)
+        val customerAccountId = cursor.getString(5)
+
+        cursor.close()
         return arrayOf(jobDescription, jobType, status, additionalRequirements, customerAccountId)
     }
 

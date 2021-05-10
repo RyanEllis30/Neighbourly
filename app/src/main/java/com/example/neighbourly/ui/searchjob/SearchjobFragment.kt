@@ -37,17 +37,21 @@ class SearchjobFragment : Fragment() {
         }
 
         paintFenceDetailsButton.setOnClickListener { //This is the first details button
-            val jobId = "00001"
+            val jobId = "1"
 
             if (this::handler.isInitialized) {
                 val data = handler.findJobDetails("$jobId")
-                val normalData = Arrays.toString(data)
-                val jobDescription = data[0]
-                val jobType = data[1]
-                val status = data[2]
-                val additionalRequirements = data[3]
-                val customerAccountId = data[4]
-                Toast.makeText(requireContext(), "$jobType", Toast.LENGTH_SHORT).show()
+                val normalData = data.contentToString()
+                Log.d("Errors", "Line 44 Searchjob $normalData")
+                if (data.count() > 0) {
+                    val jobDescription = normalData[0]
+                    val jobType = normalData[1]
+                    val status = normalData[2]
+                    val additionalRequirements = normalData[3]
+                    val customerAccountId = normalData[4]
+                }
+
+                Toast.makeText(requireContext(), "HELLO", Toast.LENGTH_SHORT).show()
             }
         }
 
