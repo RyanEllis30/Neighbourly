@@ -52,6 +52,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="132dp"
+            android:id="@+id/reviewText"
             android:hint="Message" />
     </com.google.android.material.textfield.TextInputLayout>
 
