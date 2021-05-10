@@ -32,7 +32,7 @@ class SearchjobFragment : Fragment() {
 
         val paintFenceDetailsButton = root.findViewById<Button>(R.id.button7)
         val textView3: TextView = root.findViewById(R.id.textView3) as TextView
-
+        textView3.text = jobs[0]
         paintFenceDetailsButton.setOnClickListener { //This is the first details button
             val jobId = "1"
 
@@ -45,7 +45,26 @@ class SearchjobFragment : Fragment() {
                 val status = data[2]
                 val additionalRequirements = data[3]
                 val customerAccountId = data[4]
-                textView3.text = jobDescription.toString()
+
+                Toast.makeText(requireContext(), "Description: $jobDescription \njobType: $jobType \nstatus: $status \nadditionalRequirements: $additionalRequirements \ncustomerAccountId: $customerAccountId \n", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        val shoppingDetailsButton = root.findViewById<Button>(R.id.button8)
+        val textView4: TextView = root.findViewById(R.id.textView4) as TextView
+        textView4.text = jobs[1]
+        shoppingDetailsButton.setOnClickListener { // This is the second details button
+            val jobId = "2"
+
+            if (this::handler.isInitialized) {
+                val data = handler.findJobDetails("$jobId")
+
+                val jobDescription = data[0]
+                val jobType = data[1]
+                val status = data[2]
+                val additionalRequirements = data[3]
+                val customerAccountId = data[4]
+                textView4.text = jobDescription
 
                 Toast.makeText(requireContext(), "Description: $jobDescription \njobType: $jobType \nstatus: $status \nadditionalRequirements: $additionalRequirements \ncustomerAccountId: $customerAccountId \n", Toast.LENGTH_SHORT).show()
             }
