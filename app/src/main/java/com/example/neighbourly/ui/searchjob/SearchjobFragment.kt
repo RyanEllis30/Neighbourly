@@ -28,30 +28,26 @@ class SearchjobFragment : Fragment() {
         handler = DatabaseHelper(requireContext())
 
         val root = inflater.inflate(R.layout.fragment_searchjob, container, false)
+        var jobs = handler.findAllJobs()
 
         val paintFenceDetailsButton = root.findViewById<Button>(R.id.button7)
-
         val textView3: TextView = root.findViewById(R.id.textView3) as TextView
-        textView3.setOnClickListener {
-            textView3.text = getString(R.string.paint_fence)
-        }
 
         paintFenceDetailsButton.setOnClickListener { //This is the first details button
             val jobId = "1"
 
             if (this::handler.isInitialized) {
                 val data = handler.findJobDetails("$jobId")
-                val normalData = data.contentToString()
-                Log.d("Errors", "Line 44 Searchjob $normalData")
-                if (data.count() > 0) {
-                    val jobDescription = normalData[0]
-                    val jobType = normalData[1]
-                    val status = normalData[2]
-                    val additionalRequirements = normalData[3]
-                    val customerAccountId = normalData[4]
-                }
 
-                Toast.makeText(requireContext(), "HELLO", Toast.LENGTH_SHORT).show()
+                Log.d("Errors", "Line 44 Searchjob $data")
+                val jobDescription = data[0]
+                val jobType = data[1]
+                val status = data[2]
+                val additionalRequirements = data[3]
+                val customerAccountId = data[4]
+                textView3.text = jobDescription.toString()
+
+                Toast.makeText(requireContext(), "Description: $jobDescription \njobType: $jobType \nstatus: $status \nadditionalRequirements: $additionalRequirements \ncustomerAccountId: $customerAccountId \n", Toast.LENGTH_SHORT).show()
             }
         }
 

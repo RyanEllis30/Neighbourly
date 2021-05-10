@@ -109,6 +109,25 @@ class DatabaseHelper(context: Context):SQLiteOpenHelper(context, dbname, factory
         return arrayOf(jobDescription, jobType, status, additionalRequirements, customerAccountId)
     }
 
+    fun findAllJobs(): Array<String> {
+        val db = writableDatabase
+        val query = "SELECT * FROM Task"
+        val cursor = db.rawQuery(query, null)
+
+        val descriptions: MutableList<String> = ArrayList()
+        cursor.moveToFirst()
+        var i = 0
+        while (i < cursor.count) {
+            val jobDescription = cursor.getString(1)
+            descriptions.add(i, jobDescription)
+            i++
+            cursor.moveToNext()
+        }
+
+        cursor.close()
+        return descriptions.toTypedArray()
+    }
+
     fun findUser(email: String, password: String): Boolean {
         val db = writableDatabase
         val query = "SELECT * FROM Account WHERE email = \"$email\" AND password = \"$password\""
