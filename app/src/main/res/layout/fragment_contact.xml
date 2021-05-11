@@ -12,7 +12,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Submit"
-        android:onClick="submitContactUs"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +20,8 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/TextInputMessageContactUS"
         android:layout_width="253dp"
-        android:layout_height="280dp"
+        android:layout_height="400dp"
+        android:layout_marginBottom="75dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,17 +30,29 @@
         <EditText
             android:id="@+id/TextInputEditTextMessageContactUS"
             android:layout_width="match_parent"
-            android:layout_height="273dp"
+            android:layout_height="393dp"
             android:hint="Insert message" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="105dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="83dp"
+        android:text="Username:"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.094" />
 
     <EditText
         android:id="@+id/editTextTextEmailAddress"
         android:layout_width="248dp"
-        android:layout_height="49dp"
+        android:layout_height="40dp"
         android:layout_marginTop="100dp"
         android:ems="10"
-        android:hint="Insert Email"
+        android:hint="Insert Username"
         android:text=""
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"

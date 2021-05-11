@@ -147,7 +147,6 @@ class LoginActivity : AppCompatActivity() {
     private fun updateUiWithUser(model: LoggedInUserView) {
         val welcome = getString(R.string.welcome)
         val displayName = model.displayName
-        Log.d("Errors", "TEST HELLO LOGIn: $displayName")
         val intent = Intent(this, Navigation::class.java).apply {
             putExtra("displayName", "$displayName")
         }
