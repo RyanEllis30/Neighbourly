@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.text.Editable
 import android.util.Log
 import java.util.*
 
@@ -144,9 +145,28 @@ class DatabaseHelper(context: Context):SQLiteOpenHelper(context, dbname, factory
         cursor.close()
     }
 
+    fun findJobDescriptionSearch(search: Editable): Array<String> {
+        val db = writableDatabase
+        val query = "SELECT Description FROM Task WHERE Description LIKE \"%$search%\""
+        val cursor = db.rawQuery(query, null)
+
+        val jobDescriptions: MutableList<String> = ArrayList()
+        cursor.moveToFirst()
+        var i = 0
+        while (i < cursor.count) {
+            val jobDescription = cursor.getString(0)
+            jobDescriptions.add(i, jobDescription)
+            i++
+            cursor.moveToNext()
+        }
+
+        cursor.close()
+        return jobDescriptions.toTypedArray()
+    }
+
     fun findUsersJobIDs(): Array<String> {
         val db = writableDatabase
-        val query = "SELECT * FROM Task WHERE Customer_Account_Id = \"$globalAccountID\" OR Worker_Account_Id = \"$globalAccountID\""
+        val query = "SELECT * FROM Task WHERE Customer_Account_Id = \"$globalAccountID\""
         val cursor = db.rawQuery(query, null)
 
         val jobIds: MutableList<String> = ArrayList()
@@ -161,8 +181,6 @@ class DatabaseHelper(context: Context):SQLiteOpenHelper(context, dbname, factory
 
         cursor.close()
         return jobIds.toTypedArray()
-
-
     }
 
     fun insertRating(rating: String, description: String, name: String) {

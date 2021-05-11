@@ -2,26 +2,16 @@ package com.example.neighbourly.ui.searchjob
 
 import android.app.AlertDialog
 import android.content.DialogInterface
-import android.graphics.Color
-import android.graphics.Color.red
 import android.os.Build
 import android.os.Bundle
-import android.text.Layout
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.example.neighbourly.DatabaseHelper
 import com.example.neighbourly.R
-import java.util.*
 
 class SearchjobFragment : Fragment() {
 
@@ -82,9 +72,56 @@ class SearchjobFragment : Fragment() {
 
         val root = inflater.inflate(R.layout.fragment_searchjob, container, false)
         var jobs = handler.findAllJobs()
-        val jobCount = jobs.count()
+        var jobCount = jobs.count()
         var i = 1
 
+
+        val searchButton: Button = root.findViewById(R.id.search_jobs)
+        val searchText: EditText = root.findViewById(R.id.search_jobs_input)
+
+        searchButton.setOnClickListener {
+            val searchJobText = searchText.text
+            val buttonLayout = root.findViewById<LinearLayout>(R.id.linearLayout3)
+            val textLayout = root.findViewById<LinearLayout>(R.id.linearLayout2)
+            buttonLayout.removeAllViews()
+            textLayout.removeAllViews()
+
+            jobs = handler.findJobDescriptionSearch(searchJobText)
+            jobCount = jobs.count()
+            i = 1
+
+            while (i < jobCount) {
+                // If SearchJobText is in jobs[-1]
+
+                val dynamicButton = Button(context)
+                val dynamicText = TextView(context)
+                val jobId = i
+
+                val data = handler.findJobDetails(jobId.toString())
+
+                dynamicButton.text = "Details"
+                dynamicText.text = jobs[i-1]
+                dynamicButton.id = i
+
+                // Styling
+                dynamicButton.height = 150
+                dynamicText.height = 150
+                dynamicText.setTextAppearance(R.style.TextAppearance_AppCompat_Caption)
+                dynamicButton.setTextAppearance(R.style.TextAppearance_AppCompat_Button)
+                dynamicText.textSize = 28F
+
+                dynamicButton.setOnClickListener {
+                    showCustomDialog(data[0], data[1], data[2], data[3], data[4], jobId.toString())
+                }
+
+                val buttonLayout = root.findViewById<LinearLayout>(R.id.linearLayout3)
+                val textLayout = root.findViewById<LinearLayout>(R.id.linearLayout2)
+                buttonLayout.addView(dynamicButton)
+                textLayout.addView(dynamicText)
+                i++
+            }
+
+        }
 
         //THIS DYNAMICALLY CREATES BUTTONS AND TEXTVIEWS FOR JOBS AND DETAILS
         while (i < jobCount) {
