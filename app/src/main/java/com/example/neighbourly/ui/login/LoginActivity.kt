@@ -8,6 +8,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
@@ -146,8 +147,9 @@ class LoginActivity : AppCompatActivity() {
     private fun updateUiWithUser(model: LoggedInUserView) {
         val welcome = getString(R.string.welcome)
         val displayName = model.displayName
+        Log.d("Errors", "TEST HELLO LOGIn: $displayName")
         val intent = Intent(this, Navigation::class.java).apply {
-            putExtra(displayName, usernameKey)
+            putExtra("displayName", "$displayName")
         }
         startActivity(intent)
         // TODO : initiate successful logged in experience
