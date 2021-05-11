@@ -143,6 +143,27 @@ class DatabaseHelper(context: Context):SQLiteOpenHelper(context, dbname, factory
         cursor.close()
     }
 
+    fun findUsersJobIDs(): Array<String> {
+        val db = writableDatabase
+        val query = "SELECT * FROM Task WHERE Customer_Account_Id = \"$globalAccountID\" OR Worker_Account_Id = \"$globalAccountID\""
+        val cursor = db.rawQuery(query, null)
+
+        val jobIds: MutableList<String> = ArrayList()
+        cursor.moveToFirst()
+        var i = 0
+        while (i < cursor.count) {
+            val jobId = cursor.getString(0)
+            jobIds.add(i, jobId)
+            i++
+            cursor.moveToNext()
+        }
+
+        cursor.close()
+        return jobIds.toTypedArray()
+
+
+    }
+
     fun insertRating(rating: String, description: String, name: String) {
         val db: SQLiteDatabase = writableDatabase
         val values: ContentValues = ContentValues()
