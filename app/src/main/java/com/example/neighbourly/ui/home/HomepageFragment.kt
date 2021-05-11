@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.neighbourly.Navigation
 import com.example.neighbourly.R
+import com.example.neighbourly.ui.login.usernameKey
 import com.example.neighbourly.ui.postjob.PostJobFragment
 import com.example.neighbourly.ui.searchjob.SearchjobFragment
 import com.example.neighbourly.ui.searchjob.searchjobDetails

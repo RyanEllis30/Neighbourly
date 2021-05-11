@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import com.example.neighbourly.DatabaseHelper
 import com.example.neighbourly.Navigation
 import com.example.neighbourly.R
+import com.example.neighbourly.ui.login.usernameKey
 
 class ContactFragment : Fragment() {
 
