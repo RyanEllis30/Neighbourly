@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.neighbourly.R
+import com.example.neighbourly.ui.searchjob.SearchjobFragment
 
 class HomepageFragment: Fragment() {
 
@@ -19,6 +20,7 @@ class HomepageFragment: Fragment() {
     ): View? {
 
         val root = inflater.inflate(R.layout.fragment_homepage, container, false)
+
         return root
     }
 }

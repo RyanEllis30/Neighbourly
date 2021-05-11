@@ -63,7 +63,9 @@ class SearchjobFragment : Fragment() {
 
         val paintFenceDetailsButton = root.findViewById<Button>(R.id.button7)
         val textView3: TextView = root.findViewById(R.id.textView3) as TextView
-        textView3.text = jobs[0]
+        if (jobs.size > 0) {
+            textView3.text = jobs[0]
+        }
 
         paintFenceDetailsButton.setOnClickListener { //This is the first details button
             val jobId = "1"
@@ -84,7 +86,9 @@ class SearchjobFragment : Fragment() {
 
         val shoppingDetailsButton = root.findViewById<Button>(R.id.button8)
         val textView4: TextView = root.findViewById(R.id.textView4) as TextView
-        textView4.text = jobs[1]
+        if (jobs.size > 1) {
+            textView4.text = jobs[1]
+        }
         shoppingDetailsButton.setOnClickListener { // This is the second details button
             val jobId = "2"
 
