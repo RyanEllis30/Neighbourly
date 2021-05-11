@@ -8,12 +8,8 @@ import com.example.neighbourly.R
 
 class newjobPopup : AppCompatActivity() {
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_newjob_popup)
-
-
     }
 }

@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.neighbourly.DatabaseHelper
@@ -21,16 +22,16 @@ class PostJobFragment : Fragment() {
         val inflater: LayoutInflater = this.getLayoutInflater()
         val dialogView: View = inflater.inflate(R.layout.activity_newjob_popup, null)
 
-        //val header_txt = dialogView.findViewById<TextView>(R.id.ChangeAddress)
-        //header_txt.text = "Header Message"
-        //val details_txt = dialogView.findViewById<TextView>(R.id.housenumber)
         val cancel: Button = dialogView.findViewById(R.id.Canceljob)
         cancel.setOnClickListener {
             addjobDialog.cancel()
         }
         val add: Button = dialogView.findViewById(R.id.addJob)
         add.setOnClickListener {
-            // add code to add the job
+            val description = dialogView.findViewById<TextView>(R.id.editnewdescription).text
+            val jobType = dialogView.findViewById<TextView>(R.id.editnewjobtype).text
+            val requirements = dialogView.findViewById<TextView>(R.id.editnewrequirements).text
+            handler.createJob(description.toString(), jobType.toString(), "New", requirements.toString(), "0", "0")
         }
         val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
         dialogBuilder.setOnDismissListener(object : DialogInterface.OnDismissListener {

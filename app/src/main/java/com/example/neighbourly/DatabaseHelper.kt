@@ -57,7 +57,6 @@ class DatabaseHelper(context: Context):SQLiteOpenHelper(context, dbname, factory
         val values: ContentValues = ContentValues()
         values.put("Email", email)
         values.put("Contact_Message", message)
-        Log.d("Errors", "HELLO LINE 52")
 
         db.insert("Feedback", null, values)
         db.close()
