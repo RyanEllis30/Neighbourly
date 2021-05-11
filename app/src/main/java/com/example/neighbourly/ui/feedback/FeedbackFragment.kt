@@ -1,7 +1,9 @@
 package com.example.neighbourly.ui.feedback
 
+import android.content.Intent
 import android.media.Rating
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,17 +34,17 @@ class FeedbackFragment : Fragment() {
         val review: TextInputEditText = root.findViewById(R.id.reviewText)
         val submit: Button = root.findViewById(R.id.Submit)
 
-        handler.findRating("test")
-
         submit.setOnClickListener{
-            println(rating.rating)
-            println(review.text)
+            Log.d("Errors", "Line 38 feedback")
 
             if (review.text.toString().isNotEmpty()){
                 handler.insertRating(rating.rating.toString(), review.text.toString(), "test")
+                Toast.makeText(requireContext(), "Review Submitted", Toast.LENGTH_LONG).show()
+                val intent = Intent(context, Navigation::class.java).apply {}
+                startActivity(intent)
             }
             else{
-                println("Cannot leave an empty review!")
+                Toast.makeText(requireContext(), "Cannot leave an empty review", Toast.LENGTH_LONG).show()
             }
 
         }

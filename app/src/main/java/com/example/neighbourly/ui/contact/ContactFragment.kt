@@ -45,10 +45,8 @@ class ContactFragment : Fragment() {
             if (this::handler.isInitialized) {
                 handler.insertContactMessage("$email", "$message")
                 Toast.makeText(requireContext(), "Your feedback has been noted.", Toast.LENGTH_LONG).show()
-                val transaction = activity?.supportFragmentManager?.beginTransaction()
-                transaction?.replace(requireParentFragment().id, HomepageFragment())
-                transaction?.disallowAddToBackStack()
-                transaction?.commit()
+                val intent = Intent(context, Navigation::class.java).apply {}
+                startActivity(intent)
             }
         }
 

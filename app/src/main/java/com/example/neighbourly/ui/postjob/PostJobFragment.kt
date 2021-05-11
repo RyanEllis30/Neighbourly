@@ -35,7 +35,7 @@ class PostJobFragment : Fragment() {
             val jobType = dialogView.findViewById<TextView>(R.id.editnewjobtype).text
             val requirements = dialogView.findViewById<TextView>(R.id.editnewrequirements).text
             handler.createJob(description.toString(), jobType.toString(), "New", requirements.toString(), "0")
-            Toast.makeText(requireContext(), "Creating Job", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Creating Job", Toast.LENGTH_LONG).show()
             addjobDialog.cancel()
             //Need to refresh the page here I think
         }

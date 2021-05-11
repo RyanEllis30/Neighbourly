@@ -188,10 +188,8 @@ class DatabaseHelper(context: Context):SQLiteOpenHelper(context, dbname, factory
         val values: ContentValues = ContentValues()
         values.put("Rating", rating)
         values.put("Description", description)
-        values.put("User_Name", name)
-
+        values.put("User_Name", globalUserName)
         db.insert("Review", null, values)
-        println("Successfully added $rating and $description to table Review under $name")
         db.close()
     }
 
@@ -211,7 +209,6 @@ class DatabaseHelper(context: Context):SQLiteOpenHelper(context, dbname, factory
 
     fun applyToJob(JobID: String, Customer_Account_ID: String) {
         val jobIdInt = JobID.toInt()
-        val customerId = Customer_Account_ID.toInt()
         val db = writableDatabase
         db.execSQL("UPDATE Task SET Worker_Account_Id = (\"$globalAccountID\") WHERE ID_task = (\"$jobIdInt\")")
         db.execSQL("UPDATE Task SET Status = (\"Applied\") WHERE ID_task = (\"$jobIdInt\")")
@@ -257,29 +254,22 @@ class DatabaseHelper(context: Context):SQLiteOpenHelper(context, dbname, factory
         val db = writableDatabase
         val query = "SELECT * FROM Account WHERE email = \"$email\" AND password = \"$password\""
         val cursor = db.rawQuery(query, null)
-        cursorCount = cursor.count
         return if (cursor.count<=0) {
             "No account"
         } else {
             globalEmail = email
             globalAccountID = findUserId(globalEmail)
             //globalUserName = findCustomerName(globalAccountID)
-            "Account found"
+            return "Account found"
         }
         cursor.close()
     }
 
-    fun findUserExists(email: String, password: String): Boolean {
+    fun findUserExists(email: String): Int {
         val db = writableDatabase
         val query = "SELECT * FROM Account WHERE email = \"$email\""
         val cursor = db.rawQuery(query, null)
-        cursorCount = cursor.count
-        return if (cursor.count<=0) {
-            false
-        }
-        else {
-            true
-        }
+        return cursor.count
         cursor.close()
     }
 

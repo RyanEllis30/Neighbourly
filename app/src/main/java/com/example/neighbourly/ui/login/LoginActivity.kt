@@ -8,6 +8,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
@@ -47,8 +48,7 @@ class LoginActivity : AppCompatActivity() {
             val passwordText = password.text.toString()
 
             // Use DB Handler to search for user then store result
-            handler.findUserExists("$emailText", "$passwordText")
-            val value = handler.fetchResult()
+            val value = handler.findUserExists("$emailText")
 
             if (value <= 0) { // Value = amount of records with the same email
                 handler.insertUserData("$emailText", "$passwordText")
@@ -65,15 +65,15 @@ class LoginActivity : AppCompatActivity() {
             val passwordText = password.text.toString()
 
             // Use DB Handler to search for user then store result
-            handler.findUser("$emailText", "$passwordText")
-            val value = handler.fetchResult()
+            val value = handler.findUser("$emailText", "$passwordText")
+            Log.d("Errors", "VALUE: $value")
 
-            if (value <= 0) { // Value = amount of records with the same email and password
-                showLoginFailed("Incorrect email or password")
-            }
-            else { // Successful login, log in user
+            if (value == "Account found") { // Value = amount of records with the same email and password
                 loading.visibility = View.VISIBLE
                 loginViewModel.login(emailText, passwordText)
+            }
+            else { // Successful login, log in user
+                showLoginFailed("Incorrect email or password")
             }
         }
 

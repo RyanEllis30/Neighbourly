@@ -29,6 +29,11 @@ class Navigation : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         val username = intent.getStringExtra("displayName")
+        val nameNav = findViewById<TextView>(R.id.textView)
+        if (nameNav != null) {
+            nameNav.text = username
+        }
+
         // Username = email I think, however sometimes the textview is null and will, unsure how to change it for now
         val usernameText = findViewById<TextView>(R.id.textView2)
         if (usernameText != null) {

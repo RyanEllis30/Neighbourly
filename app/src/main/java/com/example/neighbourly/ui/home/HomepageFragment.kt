@@ -30,6 +30,8 @@ class HomepageFragment: Fragment() {
         val search: Button = root.findViewById(R.id.button3)
         val post: Button = root.findViewById(R.id.button4)
 
+        val searchNav = root.findViewById<View>(R.id.nav_view)
+
         search.setOnClickListener{
             val transaction = activity?.supportFragmentManager?.beginTransaction()
             transaction?.replace(requireParentFragment().id, SearchjobFragment())
