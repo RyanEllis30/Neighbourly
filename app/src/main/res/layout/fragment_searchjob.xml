@@ -11,6 +11,8 @@
 
 
 
+
+
     ]]>
 
     <View
@@ -20,22 +22,22 @@
         android:background="?android:attr/listDivider"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.27" />
+        app:layout_constraintVertical_bias="0.354" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="266dp"
-        android:layout_height="480dp"
+        android:layout_width="257dp"
+        android:layout_height="342dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.137"
+        app:layout_constraintHorizontal_bias="0.186"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.936">
+        app:layout_constraintVertical_bias="0.82">
 
         <View
             android:id="@+id/divider14"
@@ -132,15 +134,15 @@
 
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="98dp"
-        android:layout_height="476dp"
+        android:layout_width="97dp"
+        android:layout_height="345dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.948"
+        app:layout_constraintHorizontal_bias="0.949"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.921">
+        app:layout_constraintVertical_bias="0.826">
 
         <Button
             android:id="@+id/button7"
@@ -229,11 +231,11 @@
         android:inputType="textPersonName"
         android:text="Search Jobs"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/search_jobs"
-        app:layout_constraintHorizontal_bias="0.583"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.149"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.196" />
+        app:layout_constraintVertical_bias="0.282" />
 
     <SearchView
         android:id="@+id/search_jobs"
@@ -244,7 +246,7 @@
         app:layout_constraintHorizontal_bias="0.929"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.196">
+        app:layout_constraintVertical_bias="0.281">
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -265,9 +267,9 @@
         android:background="?android:attr/listDivider"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.148" />
+        app:layout_constraintVertical_bias="0.22" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
