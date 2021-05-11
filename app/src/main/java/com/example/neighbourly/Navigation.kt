@@ -1,10 +1,12 @@
 package com.example.neighbourly
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -15,13 +17,10 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import com.example.neighbourly.ui.login.usernameKey
-
 
 class Navigation : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,8 +28,12 @@ class Navigation : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        val username = intent.getStringExtra(usernameKey)
-
+        val username = intent.getStringExtra("displayName")
+        // Username = email I think, however sometimes the textview is null and will, unsure how to change it for now
+        val usernameText = findViewById<TextView>(R.id.textView2)
+        if (usernameText != null) {
+            usernameText.text = "$username"
+        }
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
