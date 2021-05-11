@@ -155,17 +155,27 @@ class DatabaseHelper(context: Context):SQLiteOpenHelper(context, dbname, factory
         db.close()
     }
 
-    fun createJob(Description: String, Job_type: String, Status: String, Additional_requirements: String, Customer_Account_Id: String, Worker_Account_Id: String) {
+    fun createJob(Description: String, Job_type: String, Status: String, Additional_requirements: String, Worker_Account_Id: String) {
         val db = writableDatabase
         val values: ContentValues = ContentValues()
         values.put("Description", Description)
         values.put("Job_type", Job_type)
         values.put("Status", Status)
         values.put("Additional_requirements", Additional_requirements)
-        values.put("Customer_Account_Id", Customer_Account_Id)
+        values.put("Customer_Account_Id", globalAccountID)
         values.put("Worker_Account_Id", Worker_Account_Id)
 
         db.insert("Task", null, values)
+        db.close()
+    }
+
+    fun applyToJob(JobID: String, Customer_Account_ID: String) {
+        val jobIdInt = JobID.toInt()
+        val customerId = Customer_Account_ID.toInt()
+        val db = writableDatabase
+        db.execSQL("UPDATE Task SET Worker_Account_Id = (\"$globalAccountID\") WHERE ID_task = (\"$jobIdInt\")")
+        db.execSQL("UPDATE Task SET Status = (\"Applied\") WHERE ID_task = (\"$jobIdInt\")")
+        Log.d("Errors", "LINE 177 DATABASE $globalAccountID")
         db.close()
     }
 
@@ -214,7 +224,7 @@ class DatabaseHelper(context: Context):SQLiteOpenHelper(context, dbname, factory
         } else {
             globalEmail = email
             globalAccountID = findUserId(globalEmail)
-            globalUserName = findCustomerName(globalAccountID)
+            //globalUserName = findCustomerName(globalAccountID)
             Log.d("Errors", "EMAIL: $globalEmail       User ID: $globalAccountID       User Name: $globalUserName")
             "Account found"
         }

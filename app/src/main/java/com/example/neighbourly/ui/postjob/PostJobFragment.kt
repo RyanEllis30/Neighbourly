@@ -31,7 +31,10 @@ class PostJobFragment : Fragment() {
             val description = dialogView.findViewById<TextView>(R.id.editnewdescription).text
             val jobType = dialogView.findViewById<TextView>(R.id.editnewjobtype).text
             val requirements = dialogView.findViewById<TextView>(R.id.editnewrequirements).text
-            handler.createJob(description.toString(), jobType.toString(), "New", requirements.toString(), "0", "0")
+            handler.createJob(description.toString(), jobType.toString(), "New", requirements.toString(), "0")
+            Toast.makeText(requireContext(), "Creating Job", Toast.LENGTH_SHORT).show()
+            addjobDialog.cancel()
+            //Need to refresh the page here I think
         }
         val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
         dialogBuilder.setOnDismissListener(object : DialogInterface.OnDismissListener {
@@ -58,24 +61,14 @@ class PostJobFragment : Fragment() {
 
         val root = inflater.inflate(R.layout.fragment_postjob, container, false)
 
-        val postJobSubmitButton = root.findViewById<Button>(R.id.button2)
+        val postJobButton = root.findViewById<Button>(R.id.button2)
 
-        postJobSubmitButton.setOnClickListener { // This is the submit button
-            showCustomDialog() }
-            //val jobDescription = "jobDescription"
-           // val jobType = "jobType"
-           // val status = "status"
-           // val additionalRequirements = "additionalRequirements"
-           // val customerAccountId = "customerAccountId"
-           // val workerAccountId = "workerAccountId"
+        postJobButton.setOnClickListener { // This is the submit button
+            if (this::handler.isInitialized) { // This is the submit button
+                showCustomDialog()
 
-           // if (this::handler.isInitialized) {
-           //     handler.createJob("$jobDescription", "$jobType", "$status", "$additionalRequirements", "$customerAccountId", "$workerAccountId")
-           //     Log.d("Errors", "Line 43 postjob")
-           //     Toast.makeText(requireContext(), "Creating Job", Toast.LENGTH_SHORT).show()
-
-
-
+            }
+        }
         return root
     }
 }

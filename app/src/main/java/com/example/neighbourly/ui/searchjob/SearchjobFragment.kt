@@ -20,7 +20,7 @@ import java.util.*
 class SearchjobFragment : Fragment() {
 
     private lateinit var jobDetailsDialog: AlertDialog
-    fun showCustomDialog(jobDescription: String, jobType: String, status: String, additionalRequirements: String, customerAccountId: String) {
+    fun showCustomDialog(jobDescription: String, jobType: String, status: String, additionalRequirements: String, customerAccountId: String, jobId: String) {
         val inflater: LayoutInflater = this.getLayoutInflater()
         val dialogView: View = inflater.inflate(R.layout.activity_searchjob_details, null)
 
@@ -38,9 +38,15 @@ class SearchjobFragment : Fragment() {
         additionalRequirementsText.text = additionalRequirements
         customerAccountNameText.text = customerName
 
-        val cancel: Button = dialogView.findViewById(R.id.CancelJobDetails)
+        val cancel: Button = dialogView.findViewById(R.id.cancelJobDetails)
         cancel.setOnClickListener {
             jobDetailsDialog.cancel()
+        }
+
+        val apply: Button = dialogView.findViewById(R.id.applyJobDetails)
+        apply.setOnClickListener {
+            Log.d("Errors", "LINE 48 SEARCH JOB FRAGMENT")
+            handler.applyToJob(jobId, customerAccountId)
         }
 
         val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
@@ -88,7 +94,7 @@ class SearchjobFragment : Fragment() {
                 val additionalRequirements = data[3]
                 val customerAccountId = data[4]
 
-                showCustomDialog(jobDescription, jobType, status, additionalRequirements, customerAccountId)
+                showCustomDialog(jobDescription, jobType, status, additionalRequirements, customerAccountId, jobId)
             }
         }
 
@@ -110,7 +116,7 @@ class SearchjobFragment : Fragment() {
                 val customerAccountId = data[4]
                 textView4.text = jobDescription
 
-                showCustomDialog(jobDescription, jobType, status, additionalRequirements, customerAccountId)
+                showCustomDialog(jobDescription, jobType, status, additionalRequirements, customerAccountId, jobId)
             }
         }
 
@@ -132,7 +138,7 @@ class SearchjobFragment : Fragment() {
                 val customerAccountId = data[4]
                 textView5.text = jobDescription
 
-                showCustomDialog(jobDescription, jobType, status, additionalRequirements, customerAccountId)
+                showCustomDialog(jobDescription, jobType, status, additionalRequirements, customerAccountId, jobId)
             }
         }
 
@@ -154,7 +160,7 @@ class SearchjobFragment : Fragment() {
                 val customerAccountId = data[4]
                 textView6.text = jobDescription
 
-                showCustomDialog(jobDescription, jobType, status, additionalRequirements, customerAccountId)
+                showCustomDialog(jobDescription, jobType, status, additionalRequirements, customerAccountId, jobId)
             }
         }
 
@@ -176,7 +182,7 @@ class SearchjobFragment : Fragment() {
                 val customerAccountId = data[4]
                 textView7.text = jobDescription
 
-                showCustomDialog(jobDescription, jobType, status, additionalRequirements, customerAccountId)
+                showCustomDialog(jobDescription, jobType, status, additionalRequirements, customerAccountId, jobId)
             }
         }
 
@@ -198,7 +204,7 @@ class SearchjobFragment : Fragment() {
                 val customerAccountId = data[4]
                 textView8.text = jobDescription
 
-                showCustomDialog(jobDescription, jobType, status, additionalRequirements, customerAccountId)
+                showCustomDialog(jobDescription, jobType, status, additionalRequirements, customerAccountId, jobId)
             }
         }
 
@@ -220,7 +226,7 @@ class SearchjobFragment : Fragment() {
                 val customerAccountId = data[4]
                 textView9.text = jobDescription
 
-                showCustomDialog(jobDescription, jobType, status, additionalRequirements, customerAccountId)
+                showCustomDialog(jobDescription, jobType, status, additionalRequirements, customerAccountId, jobId)
             }
         }
 
