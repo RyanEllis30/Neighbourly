@@ -61,7 +61,7 @@ class PostJobFragment : Fragment() {
         val jobTypeText = dialogView.findViewById<TextView>(R.id.type)
         val statusText = dialogView.findViewById<TextView>(R.id.status)
         val additionalRequirementsText = dialogView.findViewById<TextView>(R.id.requirements)
-        val customerName = "Jason"
+        val customerName = handler.getUsername()
         //val customerName = handler.findCustomerName(customerAccountId.toInt())
         val customerAccountNameText = dialogView.findViewById<TextView>(R.id.custID)
 
@@ -77,10 +77,7 @@ class PostJobFragment : Fragment() {
         }
 
         val apply: Button = dialogView.findViewById(R.id.applyJobDetails)
-        apply.setOnClickListener {
-            Log.d("Errors", "LINE 48 POST JOB FRAGMENT")
-            handler.applyToJob(jobId, customerAccountId)
-        }
+        apply.visibility = View.GONE
 
         val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
         dialogBuilder.setOnDismissListener(object : DialogInterface.OnDismissListener {

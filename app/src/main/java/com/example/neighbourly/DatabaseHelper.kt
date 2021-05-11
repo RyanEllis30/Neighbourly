@@ -29,7 +29,7 @@ class DatabaseHelper(context: Context):SQLiteOpenHelper(context, dbname, factory
         return globalEmail
     }
 
-    fun getUsername(): String {
+    fun getUsername(): String { // Needs to be set under account when that is added with db function
         return globalUserName
     }
 
@@ -95,7 +95,8 @@ class DatabaseHelper(context: Context):SQLiteOpenHelper(context, dbname, factory
         val db: SQLiteDatabase = writableDatabase
         val values: ContentValues = ContentValues()
 
-        values.put("Name", "name")
+        globalUserName = "unknown"
+        values.put("Name", "unknown")
         values.put("Is_worker", 1)
         values.put("Verified", 0)
         values.put("Rating", 0)
@@ -196,7 +197,6 @@ class DatabaseHelper(context: Context):SQLiteOpenHelper(context, dbname, factory
         val db = writableDatabase
         db.execSQL("UPDATE Task SET Worker_Account_Id = (\"$globalAccountID\") WHERE ID_task = (\"$jobIdInt\")")
         db.execSQL("UPDATE Task SET Status = (\"Applied\") WHERE ID_task = (\"$jobIdInt\")")
-        Log.d("Errors", "LINE 177 DATABASE $globalAccountID")
         db.close()
     }
 
@@ -246,7 +246,6 @@ class DatabaseHelper(context: Context):SQLiteOpenHelper(context, dbname, factory
             globalEmail = email
             globalAccountID = findUserId(globalEmail)
             //globalUserName = findCustomerName(globalAccountID)
-            Log.d("Errors", "EMAIL: $globalEmail       User ID: $globalAccountID       User Name: $globalUserName")
             "Account found"
         }
         cursor.close()
@@ -258,11 +257,9 @@ class DatabaseHelper(context: Context):SQLiteOpenHelper(context, dbname, factory
         val cursor = db.rawQuery(query, null)
         cursorCount = cursor.count
         return if (cursor.count<=0) {
-            Log.d("Errors", "Account doesn't exist yet")
             false
         }
         else {
-            Log.d("Errors", "Account exists")
             true
         }
         cursor.close()

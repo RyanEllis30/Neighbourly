@@ -34,7 +34,7 @@ class SearchjobFragment : Fragment() {
         val jobTypeText = dialogView.findViewById<TextView>(R.id.type)
         val statusText = dialogView.findViewById<TextView>(R.id.status)
         val additionalRequirementsText = dialogView.findViewById<TextView>(R.id.requirements)
-        val customerName = "Jason"
+        val customerName = handler.getUsername()
         //val customerName = handler.findCustomerName(customerAccountId.toInt())
         val customerAccountNameText = dialogView.findViewById<TextView>(R.id.custID)
 
@@ -51,8 +51,9 @@ class SearchjobFragment : Fragment() {
 
         val apply: Button = dialogView.findViewById(R.id.applyJobDetails)
         apply.setOnClickListener {
-            Log.d("Errors", "LINE 48 SEARCH JOB FRAGMENT")
             handler.applyToJob(jobId, customerAccountId)
+            Toast.makeText(requireContext(), "Application for job submitted", Toast.LENGTH_LONG).show()
+            jobDetailsDialog.cancel()
         }
 
         val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
