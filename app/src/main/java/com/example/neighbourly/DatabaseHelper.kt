@@ -2,12 +2,9 @@ package com.example.neighbourly
 
 import android.content.ContentValues
 import android.content.Context
-import android.database.DatabaseUtils
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.database.sqlite.SQLiteCursor
 import android.util.Log
-import androidx.core.database.getStringOrNull
 import java.util.*
 
 class DatabaseHelper(context: Context):SQLiteOpenHelper(context, dbname, factory, dbversion) {
@@ -15,20 +12,36 @@ class DatabaseHelper(context: Context):SQLiteOpenHelper(context, dbname, factory
     companion object {
         const val dbname = "Neighbourly.db"
         val factory = null
-        const val dbversion = 5
+        const val dbversion = 6
         var cursorCount = 0
 
-        var globalAccountID = 0
-        var globalEmail = ""
-        var globalUserName = ""
-        var globalWorkerID = ""
+        var globalAccountID = 0 // This needs to be set somewhere upon login
+        var globalEmail = "" // This is set in findUser but should be set again with account ID
+        var globalUserName = "" // This should be set when Account name is set
+        var globalWorkerID = 0 // This probably shouldn't be a thing
+    }
+
+    fun getAccountID(): Int {
+        return globalAccountID
+    }
+
+    fun getEmail(): String {
+        return globalEmail
+    }
+
+    fun getUsername(): String {
+        return globalUserName
+    }
+
+    fun getWorkerID(): Int {
+        return globalWorkerID
     }
 
     // Do not edit the onCreate function
     override fun onCreate(db: SQLiteDatabase?) {
         Log.d("Errors", "Creating database")
         db?.execSQL("create table Account(ID_account integer primary key autoincrement, Email varchar(100) not null, Password varchar(25) not null)")
-        db?.execSQL("create table Address(ID_address integer primary key autoincrement, HouseNum integer not null, Road varchar(50) not null, City varchar(50) not null, Postcode varchar(10) not null)")
+        db?.execSQL("create table Address(ID_address integer primary key autoincrement, HouseNum integer not null, Road varchar(50) not null, City varchar(50) not null, Postcode varchar(10) not null, Account_ID integer not null, foreign key (Account_ID) references Account(ID_account))")
         db?.execSQL("create table User(ID_user integer primary key autoincrement, Name varchar(50) not null, Is_worker integer not null, Verified integer not null, Rating Real not null, Account_Id integer, Address_Id integer, foreign key (Account_Id) references Account(ID_account), foreign key (Address_Id) references Address(ID_address))")
         db?.execSQL("create table Task(ID_task integer primary key autoincrement, Description varchar(100) not null, Job_type varchar(50) not null, Status varchar(50) not null, Additional_requirements varchar(100) not null, Customer_Account_Id integer, Worker_Account_Id integer, foreign key (Customer_Account_Id) references Account(ID_account), foreign key (Worker_Account_Id) references Account(ID_account))")
         db?.execSQL("create table Review(ID_review integer primary key autoincrement, Rating integer not null, Description varchar(100) not null, User_Name varchar(50), foreign key (User_Name) references User(Name))")
@@ -40,12 +53,59 @@ class DatabaseHelper(context: Context):SQLiteOpenHelper(context, dbname, factory
         val values: ContentValues = ContentValues()
         values.put("Email", email)
         values.put("Password", password)
-
         db.insert("Account", null, values)
+        db.close()
+        initNewAddressData(email)
+    }
+
+    fun findUserId(email: String): Int {
+        val db = writableDatabase
+        val query = "SELECT ID_account FROM Account WHERE Email = \"$email\""
+        val cursor = db.rawQuery(query, null)
+        cursor.moveToFirst()
+        return cursor.getInt(0)
+    }
+
+    fun findAddressId(userId: Int): Int {
+        val db = writableDatabase
+        val query = "SELECT ID_address FROM Address WHERE Account_ID = \"$userId\""
+        val cursor = db.rawQuery(query, null)
+        cursor.moveToFirst()
+        return cursor.getInt(0)
+    }
+
+    fun initNewAddressData(email: String) {
+        val userId = findUserId(email)
+        val db: SQLiteDatabase = writableDatabase
+        val values: ContentValues = ContentValues()
+
+        values.put("HouseNum", 0)
+        values.put("Road", "")
+        values.put("City", "")
+        values.put("Postcode", "")
+        values.put("Account_ID", userId.toInt())
+
+        db.insert("Address", null, values)
+        db.close()
+        initNewUserData(userId.toInt())
+    }
+
+    fun initNewUserData(userId: Int) {
+        val addressId = findAddressId(userId)
+        val db: SQLiteDatabase = writableDatabase
+        val values: ContentValues = ContentValues()
+
+        values.put("Name", "name")
+        values.put("Is_worker", 1)
+        values.put("Verified", 0)
+        values.put("Rating", 0)
+        values.put("Account_Id", userId)
+        values.put("Address_Id", addressId)
+        db.insert("User", null, values)
         db.close()
     }
 
-    fun findCustomerName(customerAccountId: Int): String? {
+    fun findCustomerName(customerAccountId: Int): String {
         val db = writableDatabase
         val query = "SELECT Name FROM User WHERE ID_user = \"$customerAccountId\""
         val cursor = db.rawQuery(query, null)
@@ -153,6 +213,9 @@ class DatabaseHelper(context: Context):SQLiteOpenHelper(context, dbname, factory
             "No account"
         } else {
             globalEmail = email
+            globalAccountID = findUserId(globalEmail)
+            globalUserName = findCustomerName(globalAccountID)
+            Log.d("Errors", "EMAIL: $globalEmail       User ID: $globalAccountID       User Name: $globalUserName")
             "Account found"
         }
         cursor.close()
@@ -179,7 +242,12 @@ class DatabaseHelper(context: Context):SQLiteOpenHelper(context, dbname, factory
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        db.execSQL("DROP TABLE IF EXISTS Account")
+        db.execSQL("DROP TABLE IF EXISTS Account;")
+        db.execSQL("DROP TABLE IF EXISTS Address;")
+        db.execSQL("DROP TABLE IF EXISTS User;")
+        db.execSQL("DROP TABLE IF EXISTS Task;")
+        db.execSQL("DROP TABLE IF EXISTS Review;")
+        db.execSQL("DROP TABLE IF EXISTS Feedback;")
         onCreate(db)
     }
 }
