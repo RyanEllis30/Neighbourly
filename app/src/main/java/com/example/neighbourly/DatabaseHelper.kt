@@ -273,10 +273,6 @@ class DatabaseHelper(context: Context):SQLiteOpenHelper(context, dbname, factory
         cursor.close()
     }
 
-    fun fetchResult(): Int {
-        return cursorCount
-    }
-
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         db.execSQL("DROP TABLE IF EXISTS Account;")
         db.execSQL("DROP TABLE IF EXISTS Address;")
