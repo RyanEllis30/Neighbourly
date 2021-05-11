@@ -40,6 +40,18 @@ class DatabaseHelper(context: Context):SQLiteOpenHelper(context, dbname, factory
         db.close()
     }
 
+    fun findCustomerName(customerAccountId: Int): String? {
+        val db = writableDatabase
+        val query = "SELECT Name FROM User WHERE ID_user = \"$customerAccountId\""
+        val cursor = db.rawQuery(query, null)
+
+        cursor.moveToFirst()
+        val customerName = cursor.getString(0)
+
+        cursor.close()
+        return customerName
+    }
+
     fun insertContactMessage(email: String, message: String) {
         val db: SQLiteDatabase = writableDatabase
         val values: ContentValues = ContentValues()
