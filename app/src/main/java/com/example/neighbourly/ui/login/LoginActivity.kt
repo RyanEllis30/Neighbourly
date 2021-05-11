@@ -8,7 +8,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
@@ -16,6 +15,8 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 import com.example.neighbourly.*
+
+const val usernameKey = "com.example.neighbourly.displayName"
 
 class LoginActivity : AppCompatActivity() {
 
@@ -146,7 +147,7 @@ class LoginActivity : AppCompatActivity() {
         val welcome = getString(R.string.welcome)
         val displayName = model.displayName
         val intent = Intent(this, Navigation::class.java).apply {
-            putExtra("displayName", "$displayName")
+            putExtra(displayName, usernameKey)
         }
         startActivity(intent)
         // TODO : initiate successful logged in experience

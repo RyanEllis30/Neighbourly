@@ -17,11 +17,6 @@ class DatabaseHelper(context: Context):SQLiteOpenHelper(context, dbname, factory
         val factory = null
         const val dbversion = 5
         var cursorCount = 0
-
-        var globalAccountID = 0
-        var globalEmail = ""
-        var globalUserName = ""
-        var globalWorkerID = ""
     }
 
     // Do not edit the onCreate function
@@ -144,16 +139,18 @@ class DatabaseHelper(context: Context):SQLiteOpenHelper(context, dbname, factory
         return descriptions.toTypedArray()
     }
 
-    fun findUser(email: String, password: String): String {
+    fun findUser(email: String, password: String): Boolean {
         val db = writableDatabase
         val query = "SELECT * FROM Account WHERE email = \"$email\" AND password = \"$password\""
         val cursor = db.rawQuery(query, null)
         cursorCount = cursor.count
         return if (cursor.count<=0) {
-            "No account"
-        } else {
-            globalEmail = email
-            "Account found"
+            Log.d("Errors", "No account found")
+            false
+        }
+        else {
+            Log.d("Errors", "Account found")
+            true
         }
         cursor.close()
     }
