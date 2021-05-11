@@ -2,14 +2,20 @@ package com.example.neighbourly.ui.searchjob
 
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.graphics.Color
+import android.graphics.Color.red
+import android.os.Build
 import android.os.Bundle
+import android.text.Layout
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -62,10 +68,10 @@ class SearchjobFragment : Fragment() {
         jobDetailsDialog.show()
     }
 
-
     private lateinit var searchjobViewModel: SearchjobViewModel
     lateinit var handler: DatabaseHelper
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -75,159 +81,38 @@ class SearchjobFragment : Fragment() {
 
         val root = inflater.inflate(R.layout.fragment_searchjob, container, false)
         var jobs = handler.findAllJobs()
+        val jobCount = jobs.count()
+        var i = 1
 
-        val paintFenceDetailsButton = root.findViewById<Button>(R.id.button7)
-        val textView3: TextView = root.findViewById(R.id.textView3) as TextView
-        if (jobs.size > 0) {
-            textView3.text = jobs[0]
-        }
-        paintFenceDetailsButton.setOnClickListener { //This is the first details button
-            val jobId = "1"
 
-            if (this::handler.isInitialized) {
-                val data = handler.findJobDetails("$jobId")
+        //THIS DYNAMICALLY CREATES BUTTONS AND TEXTVIEWS FOR JOBS AND DETAILS
+        while (i < jobCount) {
+            val dynamicButton = Button(context)
+            val dynamicText = TextView(context)
+            val jobId = i
 
-                Log.d("Errors", "Line 44 Searchjob $data")
-                val jobDescription = data[0]
-                val jobType = data[1]
-                val status = data[2]
-                val additionalRequirements = data[3]
-                val customerAccountId = data[4]
+            val data = handler.findJobDetails(jobId.toString())
 
-                showCustomDialog(jobDescription, jobType, status, additionalRequirements, customerAccountId, jobId)
+            dynamicButton.text = "Details"
+            dynamicText.text = jobs[i-1]
+            dynamicButton.id = i
+
+            // Styling
+            dynamicButton.height = 150
+            dynamicText.height = 150
+            dynamicText.setTextAppearance(R.style.TextAppearance_AppCompat_Caption)
+            dynamicButton.setTextAppearance(R.style.TextAppearance_AppCompat_Button)
+            dynamicText.textSize = 28F
+
+            dynamicButton.setOnClickListener {
+                showCustomDialog(data[0], data[1], data[2], data[3], data[4], jobId.toString())
             }
-        }
 
-        val shoppingDetailsButton = root.findViewById<Button>(R.id.button8)
-        val textView4: TextView = root.findViewById(R.id.textView4) as TextView
-        if (jobs.size > 1) {
-            textView4.text = jobs[1]
-        }
-        shoppingDetailsButton.setOnClickListener { // This is the second details button
-            val jobId = "2"
-
-            if (this::handler.isInitialized) {
-                val data = handler.findJobDetails("$jobId")
-
-                val jobDescription = data[0]
-                val jobType = data[1]
-                val status = data[2]
-                val additionalRequirements = data[3]
-                val customerAccountId = data[4]
-                textView4.text = jobDescription
-
-                showCustomDialog(jobDescription, jobType, status, additionalRequirements, customerAccountId, jobId)
-            }
-        }
-
-        val washCarDetailsButton = root.findViewById<Button>(R.id.button9)
-        val textView5: TextView = root.findViewById(R.id.textView5) as TextView
-        if (jobs.size > 2) {
-            textView5.text = jobs[2]
-        }
-        washCarDetailsButton.setOnClickListener { // This is the second details button
-            val jobId = "3"
-
-            if (this::handler.isInitialized) {
-                val data = handler.findJobDetails("$jobId")
-
-                val jobDescription = data[0]
-                val jobType = data[1]
-                val status = data[2]
-                val additionalRequirements = data[3]
-                val customerAccountId = data[4]
-                textView5.text = jobDescription
-
-                showCustomDialog(jobDescription, jobType, status, additionalRequirements, customerAccountId, jobId)
-            }
-        }
-
-        val gardeningDetailsButton = root.findViewById<Button>(R.id.button10)
-        val textView6: TextView = root.findViewById(R.id.textView6) as TextView
-        if (jobs.size > 3) {
-            textView6.text = jobs[3]
-        }
-        gardeningDetailsButton.setOnClickListener { // This is the second details button
-            val jobId = "4"
-
-            if (this::handler.isInitialized) {
-                val data = handler.findJobDetails("$jobId")
-
-                val jobDescription = data[0]
-                val jobType = data[1]
-                val status = data[2]
-                val additionalRequirements = data[3]
-                val customerAccountId = data[4]
-                textView6.text = jobDescription
-
-                showCustomDialog(jobDescription, jobType, status, additionalRequirements, customerAccountId, jobId)
-            }
-        }
-
-        val shoppingDetailsButton2 = root.findViewById<Button>(R.id.button11)
-        val textView7: TextView = root.findViewById(R.id.textView7) as TextView
-        if (jobs.size > 4) {
-            textView7.text = jobs[4]
-        }
-        shoppingDetailsButton2.setOnClickListener { // This is the second details button
-            val jobId = "5"
-
-            if (this::handler.isInitialized) {
-                val data = handler.findJobDetails("$jobId")
-
-                val jobDescription = data[0]
-                val jobType = data[1]
-                val status = data[2]
-                val additionalRequirements = data[3]
-                val customerAccountId = data[4]
-                textView7.text = jobDescription
-
-                showCustomDialog(jobDescription, jobType, status, additionalRequirements, customerAccountId, jobId)
-            }
-        }
-
-        val dogWalkingDetailsButton = root.findViewById<Button>(R.id.button12)
-        val textView8: TextView = root.findViewById(R.id.textView8) as TextView
-        if (jobs.size > 5) {
-            textView8.text = jobs[5]
-        }
-        dogWalkingDetailsButton.setOnClickListener { // This is the second details button
-            val jobId = "6"
-
-            if (this::handler.isInitialized) {
-                val data = handler.findJobDetails("$jobId")
-
-                val jobDescription = data[0]
-                val jobType = data[1]
-                val status = data[2]
-                val additionalRequirements = data[3]
-                val customerAccountId = data[4]
-                textView8.text = jobDescription
-
-                showCustomDialog(jobDescription, jobType, status, additionalRequirements, customerAccountId, jobId)
-            }
-        }
-
-        val gardeningDetailsButton2 = root.findViewById<Button>(R.id.button13)
-        val textView9: TextView = root.findViewById(R.id.textView9) as TextView
-        if (jobs.size > 6) {
-            textView9.text = jobs[6]
-        }
-        gardeningDetailsButton2.setOnClickListener { // This is the second details button
-            val jobId = "7"
-
-            if (this::handler.isInitialized) {
-                val data = handler.findJobDetails("$jobId")
-
-                val jobDescription = data[0]
-                val jobType = data[1]
-                val status = data[2]
-                val additionalRequirements = data[3]
-                val customerAccountId = data[4]
-                textView9.text = jobDescription
-
-                showCustomDialog(jobDescription, jobType, status, additionalRequirements, customerAccountId, jobId)
-            }
+            val buttonLayout = root.findViewById<LinearLayout>(R.id.linearLayout3)
+            val textLayout = root.findViewById<LinearLayout>(R.id.linearLayout2)
+            buttonLayout.addView(dynamicButton)
+            textLayout.addView(dynamicText)
+            i++
         }
 
         return root
