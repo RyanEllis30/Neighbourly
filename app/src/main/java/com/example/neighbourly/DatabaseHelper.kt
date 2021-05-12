@@ -107,6 +107,56 @@ class DatabaseHelper(context: Context):SQLiteOpenHelper(context, dbname, factory
         db.close()
     }
 
+    fun getAddressData(): ContentValues {
+        val db = writableDatabase
+        val query = "SELECT HouseNum, Road, City, Postcode FROM Address WHERE Account_ID = \"$globalAccountID\""
+        val cursor = db.rawQuery(query, null)
+
+        cursor.moveToFirst()
+        val values = ContentValues()
+        values.put("HouseNum", cursor.getString(0))
+        values.put("Road", cursor.getString(1))
+        values.put("City", cursor.getString(2))
+        values.put("Postcode", cursor.getString(3))
+        println(values)
+        cursor.close()
+        db.close()
+        return values
+    }
+
+    fun submitAddressData(HouseNum: String, Road: String, City : String, Postcode : String) {
+        val houseNumToInt = HouseNum.toInt()
+        val db = writableDatabase
+        println(houseNumToInt)
+        db.execSQL("UPDATE Address SET HouseNum = (\"$houseNumToInt\") WHERE Account_ID = \"$globalAccountID\"")
+        db.execSQL("UPDATE Address SET Road = (\"$Road\") WHERE Account_ID = \"$globalAccountID\"")
+        db.execSQL("UPDATE Address SET City = (\"$City\") WHERE Account_ID = \"$globalAccountID\"")
+        db.execSQL("UPDATE Address SET Postcode = (\"$Postcode\") WHERE Account_ID = \"$globalAccountID\"")
+
+        db.close()
+    }
+
+    fun updatePassword(oldPassword : String, newPassword : String): Boolean{
+        val db = writableDatabase
+        val query = "SELECT Password FROM Account WHERE ID_account = \"$globalAccountID\""
+        val cursor = db.rawQuery(query, null)
+        cursor.moveToFirst()
+        println("current password is " + cursor.getString(0))
+        val passToBeChanged = cursor.getString(0)
+
+        return if (oldPassword == passToBeChanged){
+            db.execSQL("UPDATE Account SET Password = (\"$newPassword\") WHERE ID_account = \"$globalAccountID\"")
+            println("Password successfully changed to $newPassword")
+            db.close()
+            true
+        }
+        else{
+            println("Password does not match. Could not apply changes")
+            db.close()
+            false
+        }
+    }
+
     fun findCustomerName(customerAccountId: Int): String {
         val db = writableDatabase
         val query = "SELECT Name FROM User WHERE ID_user = \"$customerAccountId\""
