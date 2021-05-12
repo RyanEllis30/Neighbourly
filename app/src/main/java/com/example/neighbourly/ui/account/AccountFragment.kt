@@ -3,6 +3,7 @@ package com.example.neighbourly.ui.account
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,9 @@ class AccountFragment : Fragment() {
 
     private lateinit var changeAddressDialog: AlertDialog
     lateinit var handler:DatabaseHelper
+
+    fun String.toEditable(): Editable =  Editable.Factory.getInstance().newEditable(this)
+
     fun showCustomDialog() {
         val inflater: LayoutInflater = this.getLayoutInflater()
         val dialogView: View = inflater.inflate(R.layout.activity_address_popup, null)
@@ -23,8 +27,8 @@ class AccountFragment : Fragment() {
         cancel.setOnClickListener {
             changeAddressDialog.cancel()
         }
-        val update: Button = dialogView.findViewById(R.id.updateAddress)
 
+        val update: Button = dialogView.findViewById(R.id.updateAddress)
         update.setOnClickListener {
             // add code to update the address
             val houseNum = changeAddressDialog.findViewById<EditText>(R.id.edithousenumber)
@@ -33,7 +37,6 @@ class AccountFragment : Fragment() {
             val postcode = changeAddressDialog.findViewById<EditText>(R.id.editpostcode)
 
             handler.submitAddressData(houseNum.text.toString(), street.text.toString(), city.text.toString(), postcode.text.toString())
-
         }
         val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
         dialogBuilder.setOnDismissListener(object : DialogInterface.OnDismissListener {
@@ -101,6 +104,16 @@ class AccountFragment : Fragment() {
     ): View? {
         super.onCreate(savedInstanceState)
         val root = inflater.inflate(R.layout.fragment_account, container, false)
+
+        if (this::handler.isInitialized) { // This is the submit button
+            val nameText = root.findViewById<EditText>(R.id.textView5)
+            nameText.text = handler.getUsername().toEditable()
+            val emailText = root.findViewById<EditText>(R.id.editTextTextPersonName10)
+            emailText.text = handler.getEmail().toEditable()
+        }
+
+
+
         val buttonAddress = root.findViewById<Button>(R.id.editAddress)
         val buttonPassword = root.findViewById<Button>(R.id.editPassword)
         buttonAddress.setOnClickListener { showCustomDialog() }
