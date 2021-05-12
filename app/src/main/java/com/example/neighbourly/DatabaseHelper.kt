@@ -238,7 +238,7 @@ class DatabaseHelper(context: Context):SQLiteOpenHelper(context, dbname, factory
         val values: ContentValues = ContentValues()
         values.put("Rating", rating)
         values.put("Description", description)
-        values.put("User_Name", globalUserName)
+        values.put("ID_User", globalAccountID)
         db.insert("Review", null, values)
         db.close()
     }
