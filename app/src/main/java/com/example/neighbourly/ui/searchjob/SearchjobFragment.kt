@@ -90,7 +90,7 @@ class SearchjobFragment : Fragment() {
             jobCount = jobs.count()
             i = 1
 
-            while (i < jobCount) {
+            while (i <= jobCount) {
                 // If SearchJobText is in jobs[-1]
 
                 val dynamicButton = Button(context)
@@ -124,7 +124,7 @@ class SearchjobFragment : Fragment() {
         }
 
         //THIS DYNAMICALLY CREATES BUTTONS AND TEXTVIEWS FOR JOBS AND DETAILS
-        while (i < jobCount) {
+        while (i <= jobCount) {
             val dynamicButton = Button(context)
             val dynamicText = TextView(context)
             val jobId = i

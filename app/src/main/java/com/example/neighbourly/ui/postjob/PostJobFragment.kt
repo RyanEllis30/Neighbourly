@@ -116,7 +116,7 @@ class PostJobFragment : Fragment() {
         var i = 1
 
         //THIS DYNAMICALLY CREATES BUTTONS AND TEXTVIEWS FOR JOBS AND DETAILS
-        while (i < jobCount) {
+        while (i <= jobCount) {
             val dynamicButton = Button(context)
             val dynamicText = TextView(context)
             val jobId = jobs[i-1]
