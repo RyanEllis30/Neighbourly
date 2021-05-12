@@ -13,7 +13,7 @@ class DatabaseHelper(context: Context):SQLiteOpenHelper(context, dbname, factory
     companion object {
         const val dbname = "Neighbourly.db"
         val factory = null
-        const val dbversion = 6
+        const val dbversion = 7
         var cursorCount = 0
 
         var globalAccountID = 0 // This needs to be set somewhere upon login

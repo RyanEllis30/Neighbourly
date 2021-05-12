@@ -34,13 +34,7 @@ class LoginActivity : AppCompatActivity() {
         val password = findViewById<EditText>(R.id.password)
         val login = findViewById<Button>(R.id.login)
         val loading = findViewById<ProgressBar>(R.id.loading)
-        val forceEntryButton = findViewById<Button>(R.id.forceEntryButton)
         val register = findViewById<Button>(R.id.register)
-
-        forceEntryButton.setOnClickListener {//This is the force entry button, it will be deleted upon launch, bypasses database login
-            loading.visibility = View.VISIBLE
-            loginViewModel.login("hello", "password")
-        }
 
         register.setOnClickListener{//This is the register button, it will attempt to register a user based on the data in the textboxes
             // Collect email and password from main page
