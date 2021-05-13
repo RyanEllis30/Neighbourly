@@ -257,6 +257,16 @@ class DatabaseHelper(context: Context):SQLiteOpenHelper(context, dbname, factory
         db.close()
     }
 
+    fun setNewName(newName: String) {
+        val db = writableDatabase
+        db.execSQL("UPDATE User SET Name = (\"$newName\") WHERE ID_user = (\"$globalAccountID\")")
+    }
+
+    fun setNewEmail(newEmail: String) {
+        val db = writableDatabase
+        db.execSQL("UPDATE Account SET Email = (\"$newEmail\") WHERE ID_account = (\"$globalAccountID\")")
+    }
+
     fun applyToJob(JobID: String, Customer_Account_ID: String) {
         val jobIdInt = JobID.toInt()
         val db = writableDatabase

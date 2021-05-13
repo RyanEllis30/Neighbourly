@@ -37,6 +37,8 @@ class AccountFragment : Fragment() {
             val postcode = changeAddressDialog.findViewById<EditText>(R.id.editpostcode)
 
             handler.submitAddressData(houseNum.text.toString(), street.text.toString(), city.text.toString(), postcode.text.toString())
+            Toast.makeText(requireContext(), "Address Changed", Toast.LENGTH_LONG).show()
+            changeAddressDialog.cancel()
         }
         val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
         dialogBuilder.setOnDismissListener(object : DialogInterface.OnDismissListener {
@@ -79,9 +81,12 @@ class AccountFragment : Fragment() {
             val newPassword = changePasswordDialog.findViewById<EditText>(R.id.editnewpassword).text.toString()
             if(handler.updatePassword(oldPassword, newPassword)){
                 println("Success")
+                Toast.makeText(requireContext(), "Password Changed", Toast.LENGTH_LONG).show()
+                changePasswordDialog.cancel()
             }
             else{
                 println("Task failed")
+                Toast.makeText(requireContext(), "Task failed", Toast.LENGTH_LONG).show()
             }
 
         }
@@ -105,25 +110,34 @@ class AccountFragment : Fragment() {
         super.onCreate(savedInstanceState)
         val root = inflater.inflate(R.layout.fragment_account, container, false)
 
-        if (this::handler.isInitialized) { // This is the submit button
-            val nameText = root.findViewById<EditText>(R.id.textView5)
+        val nameText = root.findViewById<EditText>(R.id.textView5)
+        val emailText = root.findViewById<EditText>(R.id.editTextTextPersonName10)
+
+        val nameButton = root.findViewById<Button>(R.id.editName)
+        val emailButton = root.findViewById<Button>(R.id.button)
+
+        if (this::handler.isInitialized) {
             nameText.text = handler.getUsername().toEditable()
-            val emailText = root.findViewById<EditText>(R.id.editTextTextPersonName10)
             emailText.text = handler.getEmail().toEditable()
         }
 
+        nameButton.setOnClickListener {
+            val newName = nameText.text
+            handler.setNewName(newName.toString())
+            Toast.makeText(requireContext(), "Name Changed", Toast.LENGTH_LONG).show()
+        }
 
+        emailButton.setOnClickListener {
+            val newEmail = emailText.text
+            handler.setNewEmail(newEmail.toString())
+            Toast.makeText(requireContext(), "Username Changed", Toast.LENGTH_LONG).show()
+        }
 
         val buttonAddress = root.findViewById<Button>(R.id.editAddress)
         val buttonPassword = root.findViewById<Button>(R.id.editPassword)
         buttonAddress.setOnClickListener { showCustomDialog() }
         buttonPassword.setOnClickListener { showCustomDialog2() }
-
-        //buttonAddress.setOnClickListener {
-        // Handler code here.
-        //   val intent = Intent(context, addressPopup::class.java)
-        //   startActivity(intent);
-        //}
+        
         handler = DatabaseHelper(requireContext())
 
         return root
